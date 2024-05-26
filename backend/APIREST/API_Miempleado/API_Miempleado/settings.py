@@ -25,19 +25,19 @@ SECRET_KEY = 'django-insecure-xz)xo-82y2v-w8n%!9%gajitb8(($=44l=br9&s%bz*-a_g-sp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.miempleado.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'app_miempleado',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_miempleado.apps.AppMiempleadoConfig',
 ]
 
 MIDDLEWARE = [
