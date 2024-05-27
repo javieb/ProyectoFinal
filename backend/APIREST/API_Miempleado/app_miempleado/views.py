@@ -162,3 +162,45 @@ def sign_out(request):
         return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
+@csrf_exempt
+def holidaysNabsences(request):
+    if request.method == "GET":
+
+        # Verifing token
+        error_token, token = verify_token(request)
+
+        if error_token:
+            return error_token
+
+        if Empleado.objects.filter(token=token).exists():
+
+            # Take DNI and make the query
+            dni = Empleado.objects.get(token=token).dni
+
+            if VacacionesAusencias.objects.filter(empleado=dni).exists():
+                query = VacacionesAusencias.objects.filter(empleado=dni)
+
+                # Array to append data rows
+                holiday_absencesArray = []
+                for row in query:
+                    # Json with each data row
+                    json_data = {
+                        'id': row.id,
+                        'subject': row.asunto,
+                        'type': row.tipo,
+                        'start_date': row.fecha_inicio,
+                        'finish_date': row.fecha_fin,
+                        'comments': row.comentario
+                    }
+
+                    holiday_absencesArray.append(json_data)
+
+                return JsonResponse({'data': holiday_absencesArray})
+            else:
+                return JsonResponse({'data': 'No data for this employee'})
+        else:
+            return JsonResponse({'error': 'No session with that token !!'})
+
+
+
+
