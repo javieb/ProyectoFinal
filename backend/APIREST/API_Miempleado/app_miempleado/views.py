@@ -77,6 +77,28 @@ def generate_token(dni):
 
 
 @csrf_exempt
+def verify_token(request):
+
+    # Initializing token
+    token = request.META.get('HTTP_AUTHORIZATION', None)
+
+    if not token:
+        return JsonResponse({"Message": "Missing token"}, status=401), None
+    else:
+        try:
+            if token.startswith('Bearer '):
+                token = token.split(' ')[1]
+
+            # Decoding token. This check out if it is expired or invalid
+            jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+            return None, token
+        except jwt.ExpiredSignatureError:
+            return JsonResponse({"Error": "Token has expired"}, status=401), None
+        except jwt.InvalidTokenError:
+            return JsonResponse({"Error": "Token inválido"}, status=401), None
+
+
+@csrf_exempt
 def sign_in(request):
     if request.method == "POST":
 
@@ -119,5 +141,24 @@ def sign_in(request):
         return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
+@csrf_exempt
+def sign_out(request):
+    if request.method == "POST":
+        # Verifing token
+        error_token, token = verify_token(request)
+
+        if error_token:
+            return error_token
+
+        # Check out if the session exists
+        if Empleado.objects.filter(token=token).exists():
+
+            # Delete session token from BD
+            Empleado.objects.filter(token=token).update(token=None)
+            return JsonResponse({'message': 'Signed out successfully !'}, status=200)
+        else:
+            return JsonResponse({'error': 'No session with that token !!'}, status=404)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
