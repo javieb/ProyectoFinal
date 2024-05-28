@@ -251,7 +251,51 @@ def holidaysNabsences(request):
                 return JsonResponse({'message': 'Register created !'})
         else:
             return JsonResponse({'error': 'No session with that token !!'}, status=404)
+    else:
+        return JsonResponse({'error': 'Method not allowed '}, status=405)
 
+
+@csrf_exempt
+def notifications(request):
+    if request.method == "GET":
+
+        # Verifing token
+        error_token, token = verify_token(request)
+
+        if error_token:
+            return error_token
+
+        if Empleado.objects.filter(token=token).exists():
+
+            # Take DNI and make the query
+            dni = Empleado.objects.get(token=token).dni
+
+            if Notificaciones.objects.filter(receptor=dni).exists():
+                query = Notificaciones.objects.filter(receptor=dni)
+
+                # Array to append data rows
+                notificationsArray = []
+                for row in query:
+                    # Json with each data row
+                    json_data = {
+                        'id': row.id,
+                        'subject': row.asunto,
+                        'date': row.fecha,
+                        'hour': row.hora,
+                        'text': row.texto,
+                        'sender': {
+                            'name': row.emisor.nombre,
+                            'surname': row.emisor.apellidos
+                        }
+                    }
+
+                    notificationsArray.append(json_data)
+
+                return JsonResponse({'data': notificationsArray}, status=200)
+            else:
+                return JsonResponse({'data': 'No data for this employee'})
+        else:
+            return JsonResponse({'error': 'No session with that token !!'})
 
 
 
