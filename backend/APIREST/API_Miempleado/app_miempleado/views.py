@@ -195,11 +195,63 @@ def holidaysNabsences(request):
 
                     holiday_absencesArray.append(json_data)
 
-                return JsonResponse({'data': holiday_absencesArray})
+                return JsonResponse({'data': holiday_absencesArray}, status=200)
             else:
                 return JsonResponse({'data': 'No data for this employee'})
         else:
             return JsonResponse({'error': 'No session with that token !!'})
+
+    elif request.method == "POST":
+
+        # Loading json data into a var
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+        # Initializing variables
+        subject = data.get("Asunto", None)
+        type = data.get("Tipo", None)
+        start_date = data.get("Fecha inicio", None)
+        finish_date = data.get("Fecha fin", None)
+        comments = data.get("Comentarios", None)
+
+        # Verifing token
+        error_token, token = verify_token(request)
+
+        if error_token:
+            return error_token
+
+        if Empleado.objects.filter(token=token).exists():
+
+            # Take Empleado primary key
+            employee = Empleado.objects.get(token=token)
+
+            if not(subject or type or start_date or finish_date):
+                return JsonResponse({'error': 'Bad input parameter. Void variable'}, status=400)
+            elif not isinstance(subject, str) or not isinstance(type, str):
+                return JsonResponse({'error': 'Wrong data'})
+            elif subject == "" or type == "" or start_date == "" or finish_date == "":
+                return JsonResponse({'error': 'Bad input parameter. Void variable'}, status=400)
+            else:  # Validate dates
+                try:
+                    start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d').date()
+                    finish_date = datetime.datetime.strptime(finish_date, '%Y-%m-%d').date()
+                except (ValueError, TypeError):
+                    return JsonResponse({'error': 'Invalid date format. Expected YYYY-MM-DD.'}, status=400)
+
+                # New register
+                VacacionesAusencias.objects.create(
+                    asunto=subject,
+                    tipo=type,
+                    fecha_inicio=start_date,
+                    fecha_fin=finish_date,
+                    comentario=comments,
+                    empleado=employee)
+                return JsonResponse({'message': 'Register created !'})
+        else:
+            return JsonResponse({'error': 'No session with that token !!'}, status=404)
+
 
 
 
