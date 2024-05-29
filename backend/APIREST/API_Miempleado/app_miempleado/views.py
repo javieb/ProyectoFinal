@@ -297,6 +297,63 @@ def notifications(request):
         else:
             return JsonResponse({'error': 'No session with that token !!'})
 
+    elif request.method == "POST":
 
+        # Loading json data into a var
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+        # Initializing variables
+        receiver = data.get("Destinatario", None)
+        subject = data.get("Asunto", None)
+        date = data.get("Fecha", None)
+        hour = data.get("Hora", None)
+        text = data.get("Texto", None)
+
+        # Verifing token
+        error_token, token = verify_token(request)
+
+        if error_token:
+            return error_token
+
+        if Empleado.objects.filter(token=token).exists():
+
+            # Take Empleado primary key
+            employee = Empleado.objects.get(token=token)
+
+            if Empleado.objects.filter(dni=receiver).exists():
+
+                receiver = Empleado.objects.get(dni=receiver)
+
+                if not(subject or date or hour or text or receiver):
+                    return JsonResponse({'error': 'Bad input parameter. Void variable'}, status=400)
+                elif not isinstance(subject, str) or not isinstance(date, str) or not isinstance(hour, str) or not isinstance(text, str):
+                    return JsonResponse({'error': 'Wrong data'})
+                elif subject == "" or date == "" or hour == "" or text == "" or receiver == "":
+                    return JsonResponse({'error': 'Bad input parameter. Void variable'}, status=400)
+                else:  # Validate dates
+                    try:
+                        date = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+                        hour = datetime.datetime.strptime(hour, '%H:%M')
+                    except (ValueError, TypeError):
+                        return JsonResponse({'error': 'Invalid date format. Expected YYYY-MM-DD.'}, status=400)
+
+                    # New register
+                    Notificaciones.objects.create(
+                        asunto=subject,
+                        fecha=date,
+                        hora=hour,
+                        texto=text,
+                        emisor=employee,
+                        receptor=receiver)
+                    return JsonResponse({'message': 'Notifications sent !'})
+            else:
+                return JsonResponse({'error': 'No user with that DNI'}, status=409)
+        else:
+            return JsonResponse({'error': 'No session with that token !!'}, status=404)
+    else:
+        return JsonResponse({'error': 'Method not allowed '}, status=405)
 
 
