@@ -1,6 +1,6 @@
 <h1 align="center"> APP MIempleado </h1>
 <p align="center">
-  <img src="https://github.com/javieb/ProyectoFinal/blob/main/documentacion/img/logoTitulo.png?raw=true"     alt="Logo empresa" width="90" height="auto">
+  <img src="https://github.com/javieb/ProyectoFinal/blob/readme/documentacion/img/logo.png?raw=true" alt="Logo empresa" width="200" height="auto">
 </p>
 
 ![Badge en Desarollo](https://img.shields.io/badge/STATUS-EN%20DESAROLLO-blue)
