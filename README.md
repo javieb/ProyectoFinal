@@ -16,7 +16,9 @@
 MIempleado es una aplicación web que tiene como objetivo ayudar en la gestión de empleados que pueda tener una empresa. Por ejemplo, las vacaciones de los trabajadores, ausencias que puedan tener o registros de entrada y salida a la empresa.
 Informatizando todo esto disminuye considerablemente la carga que requiere el control de empleados, delegando una gran parte de esa responsabilidad a nuestra aplicación.
 
-**aquí debe ir la imagen de descripción**
+![Papeleo aburrido](https://github.com/javieb/ProyectoFinal/assets/145001884/a85bf9a9-681c-44a5-b2a5-9bc655dfdf6c)
+
+
 <h4 align="center">
 :construction: Site en obras :construction:
 </h4>
