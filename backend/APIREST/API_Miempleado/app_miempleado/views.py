@@ -197,9 +197,9 @@ def holidaysNabsences(request):
 
                 return JsonResponse({'data': holiday_absencesArray}, status=200)
             else:
-                return JsonResponse({'data': 'No data for this employee'})
+                return JsonResponse({'data': 'No data for this employee'}, status=200)
         else:
-            return JsonResponse({'error': 'No session with that token !!'})
+            return JsonResponse({'error': 'No session with that token !!'}, status=404)
 
     elif request.method == "POST":
 
@@ -356,4 +356,38 @@ def notifications(request):
     else:
         return JsonResponse({'error': 'Method not allowed '}, status=405)
 
+
+@csrf_exempt
+def lastAccess(request):
+    if request.method == "GET":
+
+        # Verifing token
+        error_token, token = verify_token(request)
+
+        if error_token:
+            return error_token
+
+        if Empleado.objects.filter(token=token).exists():
+
+            # Take DNI and make the query
+            dni = Empleado.objects.get(token=token).dni
+
+            if Registros.objects.filter(empleado=dni).exists():
+
+                # Take the last access
+                query = Registros.objects.filter(empleado=dni).order_by('-fecha', '-hora').first()
+
+                json_data = {
+                    'date': query.fecha,
+                    'time': query.hora,
+                    'type': query.tipo
+                }
+
+                return JsonResponse({'data': json_data}, status=200)
+            else:
+                return JsonResponse({'message': 'No data for this employee !!'}, status=200)
+        else:
+            return JsonResponse({'error': 'No session with that token !!'}, status=404)
+    else:
+        return JsonResponse({'error': 'Method not allowed !'}, status=405)
 
