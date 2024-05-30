@@ -8,4 +8,5 @@ urlpatterns = [
     path('holidays-absences/', views.holidaysNabsences),
     path('notifications/', views.notifications),
     path('lastAccess/', views.lastAccess),
+    path('trackday/', views.trackday_log)
 ]
