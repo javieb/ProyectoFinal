@@ -12,6 +12,9 @@ from django.contrib.auth.hashers import make_password,check_password
 import jwt
 import datetime
 
+# Paginator
+from django.core.paginator import Paginator
+
 
 # GLOBAL VARIABLES
 SECRET_KEY = "SecRetKeyDAW24"
@@ -381,6 +384,54 @@ def lastAccess(request):
                     'date': query.fecha,
                     'time': query.hora,
                     'type': query.tipo
+                }
+
+                return JsonResponse({'data': json_data}, status=200)
+            else:
+                return JsonResponse({'message': 'No data for this employee !!'}, status=200)
+        else:
+            return JsonResponse({'error': 'No session with that token !!'}, status=404)
+    else:
+        return JsonResponse({'error': 'Method not allowed !'}, status=405)
+
+
+@csrf_exempt
+def trackday_log(request):
+    if request.method == "GET":
+
+        # Verifing token
+        error_token, token = verify_token(request)
+
+        if error_token:
+            return error_token
+
+        if Empleado.objects.filter(token=token).exists():
+
+            # Take DNI and make the query
+            dni = Empleado.objects.get(token=token).dni
+
+            if Registros.objects.filter(empleado=dni).exists():
+
+                # Make query
+                query = Registros.objects.filter(empleado=dni)
+
+                # Paging
+                paginator = Paginator(query, 10)  # By default, it is limited to 10 registries
+                page = request.GET.get("page", 1)
+                registries = paginator.get_page(page)
+                trackdayArray = []
+
+                for registrie in registries:
+                    trackdayArray.append({
+                         "type": registrie.tipo,
+                         "hour": registrie.hora,
+                         "date": registrie.fecha,
+                         "comments": registrie.comentarios
+                    })
+
+                json_data = {
+                    'trackdays': trackdayArray,
+                    'page': page
                 }
 
                 return JsonResponse({'data': json_data}, status=200)
