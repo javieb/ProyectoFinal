@@ -15,8 +15,8 @@
 # Índice
 
 - ## [Descripción del proyecto](#descripción-del-proyecto)
-- ## [Características de la aplicación](#características-de-la-aplicación)
-- ## [Despliegue de la aplicación](#despliegue-de-la-aplicación)
+- ## [Características de la aplicación](#caracteristicas-de-la-aplicación)
+- ## [Despliegue de la aplicación](#despliegue-de-la-aplicacion)
 
 
 ## Descripción del proyecto
@@ -71,8 +71,18 @@ Para el envío de notificaciones habrá que ir a la página de inicio y pulsar e
 ![image](https://github.com/javieb/ProyectoFinal/assets/145001884/c4f9028f-538b-4c2c-a7e9-314c72265f35)
 
 
+## Despliegue de la aplicación
+Para poder desplegar la aplicación será necesario clonar el repositorio actual de GitHub. Para ello, hay que dirigirse al botón "Code" en la parte superior de este repositorio y copiar el código (SSH o HTTP).
 
+![image](https://github.com/javieb/ProyectoFinal/assets/145001884/d7be06bd-94c1-48ad-be97-5ec91275b34a)
 
+Una vez cclonado con el comando git clone [enlace SSH o HTTP], será necesario instalar las dependencias necesarias (tecnologías de base de datos, intérpretes de los lenguajes utilizados, instalador de paquetes...)
+
+### Puesta en marcha de las aplicaciones
+Una vez instaladas dependencias y clonado el repositorio, es necesario iniciar la aplicación en frontend y en backend (APIRest).
+
+- Next.js. Para iniciar la aplicación en el lado cliente hay que dirigirse a la ruta "frontend/app-miempleado" y ejecutar el comando **npm run dev**
+- Django. Para iniciar la aplicación en el lado servidor (API Rest) hay que dirigirse a la ruta "backend/APIREST/API_Miempleado" y ejecutar el comando **python manage.py runserver**
 
 
 
