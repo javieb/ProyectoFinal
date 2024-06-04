@@ -15,8 +15,8 @@
 # Índice
 
 - ## [Descripción del proyecto](#descripción-del-proyecto)
-- ## [Características de la aplicación](#características-de-la-aplicación)
-- ## [Despliegue de la aplicación](#despliegue-de-la-aplicación)
+- ## [Características de la aplicación](#características-de-la-aplicación-1)
+- ## [Despliegue de la aplicación](#despliegue-de-la-aplicación-1)
 
 
 ## Descripción del proyecto
