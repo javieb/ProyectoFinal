@@ -32,9 +32,49 @@ Informatizando todo esto disminuye considerablemente la carga que requiere el co
 
 ## Características de la aplicación
 
-<h4 align="center">
-:construction: En obras :construction:
-</h4>
+La aplicación ofrece varias funcionalidades para sus usuarios, entre ellos:
+
+### Inicio y registro de sesión
+Para el inicio de sesión o el registro de nuevos usuarios, la aplicación ofrece dos sencillas páginas para cumplimentar los datos.
+
+![image](https://github.com/javieb/ProyectoFinal/assets/145001884/431af9f0-86f2-4c0e-aa20-e74a6cbed1da)
+
+
+### Página de inicio
+En la página principal tendremos funcionalidades importantes como el botón para poder iniciaar o parar la jornada laboral, el último acceso, notificaciones, vacaciones por disfrutar y las tareas que se nos han asignado.
+
+![image](https://github.com/javieb/ProyectoFinal/assets/145001884/aa59245f-b6bf-48bb-b52e-39bb4759db8e)
+
+
+### Página vacaciones y ausencias
+En esta página podremos ver todas las vacaciones y ausencias de distintos tipos solicitadas por el usuario. Además, también nos aparecen los días de vacaciones que nos quedan por disfrutar para poder solicitar las correspondientes. 
+
+![image](https://github.com/javieb/ProyectoFinal/assets/145001884/63ed2e78-d70a-4747-8ffc-fa1d5d6c8aab)
+
+La funcionalidad de altas se encuentra en esta página. Encima de la tabla tendremos el botón "Alta" que nos permitirá añadir una solicitud de vacaciones o ausencia con este display:
+
+![image](https://github.com/javieb/ProyectoFinal/assets/145001884/360b00ac-4732-44af-ac4e-9500c8cfd172)
+
+
+### Página registro horario
+Al igual que en la página de vacaciones y ausencias, en la de registros horarios tendremos una tabla con los datos del empleado de accesos. Para poder dar las entradas o salidas del empleado, tendrá él mismo que pulsar el botón de acceso de la página de inicio.
+
+![image](https://github.com/javieb/ProyectoFinal/assets/145001884/b552e4f4-b84f-4966-9acb-87d53b193be2)
+
+### Página de notificaciones
+En esta página los usuarios tendrán acceso a la visualización de las notificaciones envaiadas por otros compañeros/jefe:
+
+![image](https://github.com/javieb/ProyectoFinal/assets/145001884/05f7a9c8-643c-4a69-ae00-e7b537d215c2)
+
+Para el envío de notificaciones habrá que ir a la página de inicio y pulsar en el botón "Enviar notificación" y cumplimentar el formulario:
+
+![image](https://github.com/javieb/ProyectoFinal/assets/145001884/c4f9028f-538b-4c2c-a7e9-314c72265f35)
+
+
+
+
+
+
 
 
 
