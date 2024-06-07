@@ -17,6 +17,7 @@
 - ## [Descripción del proyecto](#descripción-del-proyecto)
 - ## [Características de la aplicación](#características-de-la-aplicación-1)
 - ## [Despliegue de la aplicación](#despliegue-de-la-aplicación-1)
+- ## [Contributors](#contributors-1)
 
 
 ## Descripción del proyecto
@@ -84,6 +85,12 @@ Una vez instaladas dependencias y clonado el repositorio, es necesario iniciar l
 - Next.js. Para iniciar la aplicación en el lado cliente hay que dirigirse a la ruta "frontend/app-miempleado" y ejecutar el comando **npm run dev**
 - Django. Para iniciar la aplicación en el lado servidor (API Rest) hay que dirigirse a la ruta "backend/APIREST/API_Miempleado" y ejecutar el comando **python manage.py runserver**
 
+Además, será necesario configurar la base de datos. Para ello, se debe coger el archivo sql ubicado en backend/BD y crear una base de datos a partir de ese archivo. La base de datos debe ser de tipo SQL (MySQL, MariaDB...)
+
+<h1>Contributors</h1>
+<a href="https://github.com/javieb/ProyectoFinal/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=javieb/ProyectoFinal" />
+</a>
 
 
 
