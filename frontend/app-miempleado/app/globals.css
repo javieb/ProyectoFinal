@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/*BANNER styles */
+
+#Banner {
+  background-color: #89A593;
+  height: 100px;
+}
+
+#BannerButtons {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr;
+  column-gap: 10px;
+
+  position: relative;
+  top: 30px;
+  left: 20px;
+
+  width: 210px;
+}
+
+#Inicio {
+  background-color: #7CE7A0;
+  height: 40px;
+  width: 100px;
+}
+
+#Personal {
+  background-color: #7CE7A0;
+  height: 40px;
+  width: 100px;
+}
+
+#Inicio,
+#Personal p {
+  text-align: center;
+  padding: 10px;
+}
+/*---------*/
+
+/*MAIN styles*/
+
+#breadcrum{
+  margin: 20px;
+}
+#breadcrum p{
+  font-weight: 600;
+}
+
+#altasButton{
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 5px;
+
+  float: inline-end;
+
+  background-color: #7CE7A0;
+  padding: 5px;
+  margin-right: 50px;
+
+  box-shadow: 5px 11px 7px rgba(0, 0, 0, 0.25);
+}
+
+/*INICIO DE SESIÓN*/
+#welcome{
+  text-align: center;
+  font-size: 25px;
+  margin-top: 30px;
+}
+
+#login{
+  background-color: #589BCC;
+  width: 570px;
+  height: 270px;
+  margin: auto;
+  border: 1px solid#7CE7A0;
+  box-shadow: 1px 1px 10px;
+  margin-top: 100px;
+}
+
+/*INICIO*/
+.primaryFunctions div{
+  text-align: center;
+  background-color: #589BCC;
+}
